@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>「明」字深度解构</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Han Serif SC', 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            padding: 20px;
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(26, 26, 46, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ========== 头部区域 ========== */
+        .header {
+            background: linear-gradient(135deg, #0f3443 0%, #1a5266 100%);
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: grid-flow 20s linear infinite;
+        }
+
+        @keyframes grid-flow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+
+        .main-character {
+            font-size: 120px;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.6),
+                         0 0 80px rgba(255, 215, 0, 0.3);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 8px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #a8dadc;
+            letter-spacing: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== 内容区域 ========== */
+        .content {
+            padding: 50px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #ffd700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 30px;
+            background: linear-gradient(to bottom, #ffd700, #ff6b6b);
+            border-radius: 3px;
+        }
+
+        /* ========== 字形演化 ========== */
+        .oracle-evolution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .oracle-card {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5f7c 100%);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .oracle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .oracle-char {
+            font-size: 48px;
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .oracle-label {
+            font-size: 14px;
+            color: #a8dadc;
+            letter-spacing: 2px;
+        }
+
+        /* ========== 造字原理 ========== */
+        .principle-box {
+            background: linear-gradient(135deg, #1a3a4a 0%, #2d5266 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ffd700;
+            margin-top: 20px;
+        }
+
+        .principle-text {
+            font-size: 18px;
+            line-height: 2;
+            color: #e8f4f8;
+        }
+
+        .principle-highlight {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 22px;
+            padding: 0 5px;
+        }
+
+        /* ========== 核心意象 ========== */
+        .imagery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .imagery-item {
+            background: rgba(42, 82, 102, 0.4);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .imagery-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .imagery-title {
+            font-size: 20px;
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .imagery-desc {
+            font-size: 16px;
+            color: #b8c5d0;
+            line-height: 1.8;
+        }
+
+        /* ========== 同部首字关系 ========== */
+        .radical-network {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .radical-tag {
+            background: linear-gradient(135deg, #2c5f7c 0%, #1e3a5f 100%);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 18px;
+            color: #ffd700;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .radical-tag:hover {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a2e;
+            border-color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        /* ========== 语义拓扑图 ========== */
+        .topology-container {
+            background: linear-gradient(135deg, #0f2537 0%, #1a3a4a 100%);
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topology-center {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .topology-core {
+            font-size: 64px;
+            color: #ffd700;
+            font-weight: bold;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .topology-branches {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .topology-branch {
+            background: rgba(42, 82, 102, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid #ffd700;
+        }
+
+        .branch-title {
+            font-size: 20px;
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .branch-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .branch-item {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-size: 15px;
+            color: #a8dadc;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 768px) {
+            .header {
+                padding: 30px 20px;
+            }
+
+            .main-character {
+                font-size: 80px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .topology-branches {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="main-character">明</div>
+            <div class="subtitle">字源探微 · 意象重构</div>
+        </div>
+
+        <!-- 主体内容 -->
+        <div class="content">
+            <!-- 第一节: 字形本源 -->
+            <section class="section">
+                <h2 class="section-title">一、字形本源：从天象到文字</h2>
+                <div class="oracle-evolution">
+                    <div class="oracle-card">
+                        <div class="oracle-char">🌙☀</div>
+                        <div class="oracle-label">甲骨文</div>
+                        <p style="margin-top:12px; color:#b8c5d0; font-size:14px; line-height:1.6;">
+                            左月右日<br>日月并照之象
+                        </p>
+                    </div>
+                    <div class="oracle-card">
+                        <div class="oracle-char">囧</div>
+                        <div class="oracle-label">金文</div>
+                        <p style="margin-top:12px; color:#b8c5d0; font-size:14px; line-height:1.6;">
+                            窗户纳光之形<br>囧(窗)+ 月 → 明
+                        </p>
+                    </div>
+                    <div class="oracle-card">
+                        <div class="oracle-char">明</div>
+                        <div class="oracle-label">小篆/楷书</div>
+                        <p style="margin-top:12px; color:#b8c5d0; font-size:14px; line-height:1.6;">
+                            日月构形稳定<br>成为标准写法
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二节: 造字原理 -->
+            <section class="section">
+                <h2 class="section-title">二、造字原理：会意之妙</h2>
+                <div class="principle-box">
+                    <p class="principle-text">
+                        <span class="principle-highlight">日</span>(太阳)+
+                        <span class="principle-highlight">月</span>(月亮)→
+                        <span class="principle-highlight">明</span>
+                    </p>
+                    <p class="principle-text" style="margin-top:25px;">
+                        <strong style="color:#ffd700;">核心逻辑:</strong>
+                        日月交辉,天地大明。日主昼明,月主夜明,二者合体,象征光明无间,照破一切昏暗。
+                    </p>
+                    <p class="principle-text" style="margin-top:20px;">
+                        <strong style="color:#ffd700;">哲学内涵:</strong>
+                        明非单纯的物理光照,而是<strong>认知的澄明</strong>、<strong>智慧的通透</strong>、<strong>道德的清朗</strong>。
+                        日为阳刚之明(理性/法则),月为阴柔之明(直觉/包容),二者合一,达至圆融无碍之境。
+                    </p>
+                </div>
+            </section>
+
+            <!-- 第三节: 核心意象 -->
+            <section class="section">
+                <h2 class="section-title">三、核心意象：四维展开</h2>
+                <div class="imagery-grid">
+                    <div class="imagery-item">
+                        <div class="imagery-icon">💡</div>
+                        <div class="imagery-title">物理之明</div>
+                        <div class="imagery-desc">
+                            光照万物,驱散黑暗。明亮、照耀、清晰可见,是一切视觉认知的前提。
+                        </div>
+                    </div>
+                    <div class="imagery-item">
+                        <div class="imagery-icon">🧠</div>
+                        <div class="imagery-title">认知之明</div>
+                        <div class="imagery-desc">
+                            心智澄澈,洞察本质。明白、明了、明悟,是智慧的核心表征。
+                        </div>
+                    </div>
+                    <div class="imagery-item">
+                        <div class="imagery-icon">⚖️</div>
+                        <div class="imagery-title">道德之明</div>
+                        <div class="imagery-desc">
+                            是非分明,表里如一。正大光明、光明磊落,是君子人格的底色。
+                        </div>
+                    </div>
+                    <div class="imagery-item">
+                        <div class="imagery-icon">🔮</div>
+                        <div class="imagery-title">时间之明</div>
+                        <div class="imagery-desc">
+                            日月轮转,明日可期。明天、明年、明朝,时间因明而获得延续性。
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第四节: 同部首字关系 -->
+            <section class="section">
+                <h2 class="section-title">四、同部首字关系：日月家族</h2>
+
+                <div style="margin-bottom:30px;">
+                    <h3 style="color:#a8dadc; font-size:20px; margin-bottom:15px;">日部字群 (阳性光明)</h3>
+                    <div class="radical-network">
+                        <div class="radical-tag">昭 (照耀显著)</div>
+                        <div class="radical-tag">晨 (清晨之光)</div>
+                        <div class="radical-tag">晴 (天气澄朗)</div>
+                        <div class="radical-tag">昌 (繁盛光明)</div>
+                        <div class="radical-tag">晖 (阳光辉映)</div>
+                        <div class="radical-tag">昱 (日光明亮)</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color:#a8dadc; font-size:20px; margin-bottom:15px;">月部字群 (阴性光明)</h3>
+                    <div class="radical-network">
+                        <div class="radical-tag">朗 (月色明朗)</div>
+                        <div class="radical-tag">朦 (月光朦胧)</div>
+                        <div class="radical-tag">朔 (月初新生)</div>
+                        <div class="radical-tag">望 (月满之时)</div>
+                        <div class="radical-tag">期 (月满为期)</div>
+                    </div>
+                </div>
+
+                <div class="principle-box" style="margin-top:25px;">
+                    <p class="principle-text">
+                        <strong style="color:#ffd700;">结构关系:</strong>
+                        「明」作为日月合体字,统摄日部与月部的光明语义场。日部字多表<strong>刚健直射之明</strong>(昭、晖、晴),
+                        月部字多表<strong>柔和渗透之明</strong>(朗、朦、期)。明字兼备二者,故能涵盖从物理光照到心智澄明的全部光谱。
+                    </p>
+                </div>
+            </section>
+
+            <!-- 第五节: 语义拓扑可视化 -->
+            <section class="section">
+                <h2 class="section-title">五、语义拓扑可视化</h2>
+                <div class="topology-container">
+                    <div class="topology-center">
+                        <div class="topology-core">明</div>
+                        <p style="color:#a8dadc; font-size:16px;">核心节点 / 语义辐射网络</p>
+                    </div>
+
+                    <div class="topology-branches">
+                        <!-- 分支1 -->
+                        <div class="topology-branch">
+                            <div class="branch-title">📐 空间维度</div>
+                            <div class="branch-items">
+                                <div class="branch-item">明堂(宫殿)</div>
+                                <div class="branch-item">明镜(清澈)</div>
+                                <div class="branch-item">明窗净几</div>
+                                <div class="branch-item">明察秋毫</div>
+                            </div>
+                        </div>
+
+                        <!-- 分支2 -->
+                        <div class="topology-branch">
+                            <div class="branch-title">⏳ 时间维度</div>
+                            <div class="branch-items">
+                                <div class="branch-item">明日</div>
+                                <div class="branch-item">明年</div>
+                                <div class="branch-item">明朝</div>
+                                <div class="branch-item">黎明</div>
+                            </div>
+                        </div>
+
+                        <!-- 分支3 -->
+                        <div class="topology-branch">
+                            <div class="branch-title">🧭 认知维度</div>
+                            <div class="branch-items">
+                                <div class="branch-item">明白</div>
+                                <div class="branch-item">明了</div>
+                                <div class="branch-item">明悟</div>
+                                <div class="branch-item">明智</div>
+                                <div class="branch-item">英明</div>
+                                <div class="branch-item">贤明</div>
+                            </div>
+                        </div>
+
+                        <!-- 分支4 -->
+                        <div class="topology-branch">
+                            <div class="branch-title">⚡ 道德维度</div>
+                            <div class="branch-items">
+                                <div class="branch-item">光明磊落</div>
+                                <div class="branch-item">正大光明</div>
+                                <div class="branch-item">明德</div>
+                                <div class="branch-item">明礼</div>
+                                <div class="branch-item">明辨是非</div>
+                            </div>
+                        </div>
+
+                        <!-- 分支5 -->
+                        <div class="topology-branch">
+                            <div class="branch-title">👁️ 感知维度</div>
+                            <div class="branch-items">
+                                <div class="branch-item">明亮</div>
+                                <div class="branch-item">明媚</div>
+                                <div class="branch-item">明艳</div>
+                                <div class="branch-item">明快</div>
+                                <div class="branch-item">明澈</div>
+                            </div>
+                        </div>
+
+                        <!-- 分支6 -->
+                        <div class="topology-branch">
+                            <div class="branch-title">🌐 政治维度</div>
+                            <div class="branch-items">
+                                <div class="branch-item">明君</div>
+                                <div class="branch-item">明主</div>
+                                <div class="branch-item">明政</div>
+                                <div class="branch-item">明朝(王朝)</div>
+                                <div class="branch-item">清明(政治)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 底部总结 -->
+                    <div style="margin-top:40px; padding-top:30px; border-top:1px solid rgba(255,215,0,0.2);">
+                        <p style="color:#a8dadc; font-size:16px; line-height:2; text-align:center;">
+                            从物理光照 → 认知澄明 → 道德清朗 → 时间延展 → 政治理想<br>
+                            「明」字构建了一个<strong style="color:#ffd700;">从感官到心智、从个体到社会的完整语义宇宙</strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 结语 -->
+            <section class="section" style="border:none;">
+                <div style="background:linear-gradient(135deg, #1a3a4a 0%, #0f2537 100%); padding:35px; border-radius:12px; text-align:center;">
+                    <p style="font-size:22px; color:#ffd700; margin-bottom:20px; font-weight:bold;">
+                        明之本质
+                    </p>
+                    <p style="font-size:18px; line-height:2; color:#e8f4f8;">
+                        日月同辉,阴阳和合,照破三千世界之昏暗。<br>
+                        明非止于眼见,更在于心悟;<br>
+                        非止于知识,更在于智慧;<br>
+                        非止于当下,更在于未来。<br><br>
+                        <strong style="color:#ffd700; font-size:20px;">
+                            天地有大明,人心有至明,此「明」字之真义也。
+                        </strong>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

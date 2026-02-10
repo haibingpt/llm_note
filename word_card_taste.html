@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Word Mastery: Taste</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-color: #F3F4F6; /* 更柔和的现代灰 */
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --accent-color: #000000; /* 极致黑白 */
+    --border-color: #E5E7EB;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 主容器 */
+  .container {
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* 1. 头部区域 */
+  .header {
+    border-bottom: 3px solid var(--text-main);
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .word-title {
+    font-family: var(--font-serif);
+    font-size: 4.5em;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .phonetic {
+    font-family: 'Courier New', monospace;
+    font-size: 1.25em;
+    color: var(--text-muted);
+  }
+
+  /* 2. Bento 主体区域 (核心修复) */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr; /* 黄金比例分割 */
+    gap: 24px;
+    align-items: start; /* 防止高度强制拉伸 */
+  }
+
+  /* 列容器：让内部元素自然堆叠，消除间隙 */
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* 通用卡片样式 */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    height: fit-content; /* 关键：适应内容高度 */
+    transition: transform 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  /* 特定内容样式 */
+  .definition-text {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    color: var(--text-main);
+  }
+  .highlight-red { color: #BE123C; font-weight: bold; }
+  .highlight-blue { color: #1D4ED8; font-weight: bold; }
+
+  .etymology-content {
+    font-size: 0.95em;
+  }
+
+  .nuance-list {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .nuance-item { margin-bottom: 8px; }
+
+  .quote-box {
+    margin-top: 16px;
+    padding-left: 12px;
+    border-left: 3px solid #BE123C;
+    font-style: italic;
+    color: var(--text-muted);
+    font-family: var(--font-serif);
+  }
+
+  /* Mermaid 优化 */
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: #FAFAFA;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  /* 3. 底部 Epiphany (全宽) */
+  .epiphany-box {
+    background-color: #111; /* 深黑底色 */
+    color: #fff;
+    padding: 32px;
+    text-align: center;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .epiphany-label {
+    font-size: 0.7em;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .epiphany-text {
+    font-family: 'Courier New', monospace;
+    font-size: 1.4em;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+  /* 装饰线 */
+  .epiphany-box::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 4px;
+    background: linear-gradient(90deg, #BE123C, #1D4ED8);
+  }
+
+  /* 移动端适配 */
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .word-title { font-size: 3em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1 class="word-title">Taste</h1>
+    <span class="phonetic">/teɪst/</span>
+  </div>
+
+  <div class="bento-grid">
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">CORE MEANING (核心语义)</div>
+        <div class="definition-text">
+          <b>原始画面</b>：一个人小心翼翼地将食物送入口中，舌尖轻触，闭眼感受——这不是吞咽，而是<b>试探性的触碰</b>。<br><br>
+          <b>核心意象</b>：<span class="highlight-red">触碰</span> + <span class="highlight-blue">判断</span> = 品味<br><br>
+          Taste 的灵魂在于：它从来不是被动的接收，而是<b>主动的试探</b>。舌头是人体最敏感的器官之一，它的每一次触碰都是一次微型审判——酸甜苦辣，瞬间定性。<br><br>
+          当这个词从味觉跃入精神领域，它保留了这个核心结构：<b>taste 是一种不需要逻辑推演、却能瞬间做出高下判断的能力</b>。一个有 taste 的人，不需要解释为什么某样东西好——他舌尖一碰就知道了。这正是"品味"最迷人之处：它是<b>训练到极致后伪装成直觉的判断力</b>。
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">NUANCE & CONTEXT (语感与语境)</div>
+        <div class="etymology-content">
+          <ul class="nuance-list">
+            <li class="nuance-item"><b>Taste vs. Flavor</b>：Flavor 是食物本身的客观属性（风味），Taste 是主体的感知与判断能力。Flavor 在食物里，Taste 在人身上。你可以说 "This wine has a complex flavor"，但只能说 "She has excellent taste"。</li>
+            <li class="nuance-item"><b>Taste vs. Aesthetic</b>：Aesthetic 偏向系统化的美学理论与哲学框架；Taste 更私人、更本能、更不可言说。Aesthetic 是写在书上的，Taste 是长在身体里的。</li>
+            <li class="nuance-item"><b>Good taste vs. Bad taste</b>：这组搭配揭示了 taste 隐藏的<b>阶级属性</b>——"品味"从来不是中性的，它暗含了一套社会公认的高下标准。Pierre Bourdieu 的整本《Distinction》都在拆解这件事。</li>
+          </ul>
+          <div class="quote-box">
+            "He had the taste to know when silence was more eloquent than speech, and the courage to practice it."
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">SEMANTIC TOPOLOGY (语义拓扑)</div>
+        <div class="mermaid">
+graph TD
+    A["拉丁语 taxare<br/>触摸、试探"] --> B["古法语 taster<br/>品尝、触碰"]
+    B --> C["舌尖的判断<br/>味觉感知"]
+    C --> D["审美判断力<br/>Good Taste"]
+    C --> E["个人偏好<br/>A taste for jazz"]
+    D --> F["社会区隔<br/>阶级符号"]
+    E --> G["少量体验<br/>A taste of freedom"]
+    A --> H["同源: Tax<br/>评估、触碰价值"]
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">ETYMOLOGY (词源)</div>
+        <div class="etymology-content">
+          <b>词根</b>：来自拉丁语 <b>taxāre</b>（触摸、估量、试探），经由古法语 <b>taster</b>（品尝、触碰）进入英语。taxāre 本身是 <b>tangere</b>（触碰）的反复体，意为"反复触碰以做出判断"。<br><br>
+          <b>同源词 (Cognates)</b>：
+          <ul class="nuance-list">
+            <li class="nuance-item"><b>Tax</b>（税）：本义是"评估财产价值"——用手触碰、掂量，然后定价。从"触碰估量"到"征税"，逻辑一脉相承。</li>
+            <li class="nuance-item"><b>Tangible</b>（有形的）：来自同一印欧词根 *tag-（触碰）。Tangible 是"可以被触碰的"，Taste 是"用舌头去触碰"。</li>
+            <li class="nuance-item"><b>Tact</b>（圆滑、得体）：也源于"触碰"——一个有 tact 的人，懂得在社交中如何"轻触"而不冒犯。Taste 审美，Tact 审人。</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="epiphany-box">
+    <span class="epiphany-label">EPIPHANY (一语道破)</span>
+    <div class="epiphany-text">
+      "Taste is judgment that has forgotten its reasons.<br/>品味，是忘记了理由的判断力。"
+    </div>
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#ffffff',
+      primaryTextColor: '#1a1a1a',
+      primaryBorderColor: '#333',
+      lineColor: '#333',
+      fontFamily: 'Inter, sans-serif',
+      fontSize: '13px'
+    }
+  });
+</script>
+</body>
+</html>

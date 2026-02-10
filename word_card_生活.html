@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Word Mastery: 生活</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-color: #F3F4F6; /* 更柔和的现代灰 */
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --accent-color: #000000; /* 极致黑白 */
+    --border-color: #E5E7EB;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 主容器 */
+  .container {
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* 1. 头部区域 */
+  .header {
+    border-bottom: 3px solid var(--text-main);
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .word-title {
+    font-family: var(--font-serif);
+    font-size: 4.5em;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .phonetic {
+    font-family: 'Courier New', monospace;
+    font-size: 1.25em;
+    color: var(--text-muted);
+  }
+
+  /* 2. Bento 主体区域 (核心修复) */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr; /* 黄金比例分割 */
+    gap: 24px;
+    align-items: start; /* 防止高度强制拉伸 */
+  }
+
+  /* 列容器:让内部元素自然堆叠,消除间隙 */
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* 通用卡片样式 */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    height: fit-content; /* 关键:适应内容高度 */
+    transition: transform 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  /* 特定内容样式 */
+  .definition-text {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    color: var(--text-main);
+  }
+  .highlight-red { color: #BE123C; font-weight: bold; }
+  .highlight-blue { color: #1D4ED8; font-weight: bold; }
+
+  .etymology-content {
+    font-size: 0.95em;
+  }
+
+  .nuance-list {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .nuance-item { margin-bottom: 8px; }
+
+  .quote-box {
+    margin-top: 16px;
+    padding-left: 12px;
+    border-left: 3px solid #BE123C;
+    font-style: italic;
+    color: var(--text-muted);
+    font-family: var(--font-serif);
+  }
+
+  /* Mermaid 优化 */
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: #FAFAFA;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  /* 3. 底部 Epiphany (全宽) */
+  .epiphany-box {
+    background-color: #111; /* 深黑底色 */
+    color: #fff;
+    padding: 32px;
+    text-align: center;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .epiphany-label {
+    font-size: 0.7em;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .epiphany-text {
+    font-family: 'Courier New', monospace;
+    font-size: 1.4em;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+  /* 装饰线 */
+  .epiphany-box::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 4px;
+    background: linear-gradient(90deg, #BE123C, #1D4ED8);
+  }
+
+  /* 移动端适配 */
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .word-title { font-size: 3em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1 class="word-title">生活</h1>
+    <span class="phonetic">/shēng huó/</span>
+  </div>
+
+  <div class="bento-grid">
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">CORE MEANING (核心语义)</div>
+        <div class="definition-text">
+          <b>原始画面</b>: 一粒种子破土而出,抽芽长叶,枝繁叶茂,终而凋零归土,复化养分——生命在时间之流中不断往复运动。<br><br>
+
+          <b>核心意象</b>: <span class="highlight-red">生</span>(生成/涌现) + <span class="highlight-blue">活</span>(流动/运动) = <b>持续涌现并流动的存在状态</b><br><br>
+
+          "生活"非静态之物,乃动态之势。生者,从无到有之创生;活者,从静到动之激活。二字合体,道出存在的根本结构:<br>
+          <b>生</b>是能量的聚合(从混沌到有序),<b>活</b>是能量的流通(从停滞到涌动)。<br><br>
+
+          故生活非"已完成之状态",而是"正在进行之过程"——它是吃饭喝水的代谢循环,是悲欢离合的情绪波动,是昼夜更替的节律守恒。一旦停止流动(活),生命便归于死寂;一旦失去新生(生),存在便陷入重复。<br><br>
+
+          生活之真谛,在于<b>不断创生新的可能性</b>(生),并让其在现实中流转运作(活)——这是宇宙赋予有机体的最基本使命。
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">NUANCE & CONTEXT (语感与语境)</div>
+        <div class="etymology-content">
+          <ul class="nuance-list">
+            <li class="nuance-item"><b>生活 vs 生存</b>: 生存强调"维持最低限度不死"(survive),是防御性姿态;生活强调"在存在中展开丰富性"(live),是创造性姿态。前者追求安全,后者追求意义。</li>
+
+            <li class="nuance-item"><b>生活 vs 人生</b>: 人生是线性叙事(一生的时间线),侧重宏观轨迹与终极意义;生活是循环体验(日常的微观流动),侧重当下质感与即时感受。人生是传记,生活是日记。</li>
+
+            <li class="nuance-item"><b>生活 vs 生命</b>: 生命是生物学范畴(biological life),强调有机体的生理机能;生活是现象学范畴(living experience),强调主体的体验结构。生命可以维持却失去活力,生活则必须持续涌现新鲜感。</li>
+          </ul>
+          <div class="quote-box">
+            "生活不是你活了多少天,而是你记住了多少天,以及你如何让它值得记忆。"<br>
+            — 马尔克斯《百年孤独》
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">SEMANTIC TOPOLOGY (语义拓扑)</div>
+        <div class="mermaid">
+graph TD
+    A[生:从无到有] --> B[活:从静到动]
+    B --> C[日常实践:吃喝拉撒睡]
+    B --> D[情感体验:喜怒哀乐惧]
+    B --> E[社会关系:群居互动]
+    C --> F[生活的物质维度]
+    D --> F[生活的精神维度]
+    E --> F
+    F --> G[生活 = 持续涌现的存在]
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">ETYMOLOGY (词源)</div>
+        <div class="etymology-content">
+          <b>生</b>(shēng): 甲骨文从"草木破土而出"之象,本义为"生长/诞生"。引申为一切从无到有的过程——生产、生育、生成、生机。<br><br>
+
+          <b>活</b>(huó): 古字从"水"(氵)+ "舌"(舌),表示"水在口中流动"(饮水吞咽之动作)。本义为"流动/活跃",引申为生命体的运动状态——活力、活泼、活着。<br><br>
+
+          <b>同源词脉络</b>:<br>
+          • 生 → 生存(survive) / 生机(vitality) / 生成(generate)<br>
+          • 活 → 活力(vigor) / 活动(activity) / 激活(activate)<br><br>
+
+          二字组合,"生活"构成一个完整的动力学系统:生是创生的势能,活是流转的动能。
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="epiphany-box">
+    <span class="epiphany-label">EPIPHANY (一语道破)</span>
+    <div class="epiphany-text">
+      "生活:不是你拥有了什么状态,而是你正在经历什么流动。<br>
+      Life: not what state you possess, but what flow you are experiencing."
+    </div>
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#ffffff',
+      primaryTextColor: '#1a1a1a',
+      primaryBorderColor: '#333',
+      lineColor: '#333',
+      fontFamily: 'Inter, sans-serif',
+      fontSize: '13px'
+    }
+  });
+</script>
+</body>
+</html>

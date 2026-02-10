@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>汉字解剖: 矛盾</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-color: #1a1a1a; /* 深色背景,呼应墨色 */
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --accent-red: #C41E3A; /* 中国红 */
+    --accent-gold: #FFD700; /* 金色,象征典籍 */
+    --border-color: #E5E7EB;
+    --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif; /* 宋体系 */
+    --font-sans: 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--bg-color) 0%, #2d1b1b 100%);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* 1. 头部 - 大字展示 */
+  .header {
+    background: var(--card-bg);
+    padding: 48px 40px;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .word-title {
+    font-family: 'STKaiti', 'KaiTi', var(--font-serif); /* 楷体,笔触感 */
+    font-size: 6em;
+    font-weight: 700;
+    margin: 0;
+    color: var(--accent-red);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    line-height: 1;
+  }
+  .pinyin {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5em;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* 2. Bento Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* 卡片样式 */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-red);
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  /* 内容区块 */
+  .genesis-content {
+    font-family: var(--font-serif);
+    font-size: 1.05em;
+    line-height: 1.9;
+  }
+  .genesis-content b {
+    color: var(--accent-red);
+  }
+
+  .semantics-text {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    color: var(--text-main);
+    line-height: 2;
+  }
+
+  .network-list {
+    margin: 0;
+    padding-left: 24px;
+    list-style: none;
+  }
+  .network-list li {
+    margin-bottom: 12px;
+    padding-left: 20px;
+    border-left: 3px solid var(--accent-gold);
+  }
+  .network-list li::marker {
+    content: "◆ ";
+    color: var(--accent-red);
+  }
+
+  .quote-box {
+    margin-top: 20px;
+    padding: 16px;
+    background: #FFF9E6;
+    border-left: 4px solid var(--accent-gold);
+    font-style: italic;
+    font-family: var(--font-serif);
+    color: #4A4A4A;
+    border-radius: 4px;
+  }
+
+  /* Mermaid 拓扑图 */
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: #FAFAFA;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+  }
+
+  /* 3. 底部 Epiphany - 全宽金句 */
+  .epiphany-box {
+    background: linear-gradient(135deg, #1a1a1a 0%, #3d1a1a 100%);
+    color: #fff;
+    padding: 48px;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .epiphany-label {
+    font-size: 0.75em;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    display: block;
+    color: var(--accent-gold);
+  }
+  .epiphany-text {
+    font-family: var(--font-serif);
+    font-size: 1.6em;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #FFE6A7;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  }
+  /* 装饰纹样 */
+  .epiphany-box::before {
+    content: "◆◆◆";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    color: var(--accent-gold);
+    opacity: 0.4;
+  }
+
+  /* 移动端适配 */
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .word-title { font-size: 4em; }
+    .header { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 头部: 大字 + 拼音 -->
+  <div class="header">
+    <h1 class="word-title">矛盾</h1>
+    <span class="pinyin">máo dùn</span>
+  </div>
+
+  <!-- Bento 布局 -->
+  <div class="bento-grid">
+
+    <div class="column">
+
+      <!-- 字形本源 -->
+      <div class="card">
+        <div class="card-label">字形本源 (Character Genesis)</div>
+        <div class="genesis-content">
+          <p><b>【矛】máo - 长兵器,进攻之象</b></p>
+          <ul>
+            <li><b>甲骨文画面</b>: 象形字。上部为尖锐的矛头 (△),下部为长柄 (丨)。整体如一件直刺敌阵的长兵器,矛尖锋利向前。</li>
+            <li><b>演化路径</b>: 甲骨文 矛 → 金文 矛头加饰纹 → 小篆规整化为「矛」(矛+予声) → 楷书简化为今体「矛」(矛)。</li>
+            <li><b>造字六书</b>: <b>象形</b>(早期) + <b>形声</b>(后期,矛旁为形,予为声)</li>
+            <li><b>核心意象公式</b>: 矛 = 尖锐 + 长柄 + 直刺 = <b>主动攻击力量的物质化</b></li>
+          </ul>
+
+          <p style="margin-top: 28px;"><b>【盾】dùn - 防御工具,抵御之象</b></p>
+          <ul>
+            <li><b>甲骨文画面</b>: 会意字。上部为「干」(兵器柄,引申为捍卫),下部或左右加「目」形(盾牌上的纹饰/瞭望孔)。整体象征手持盾牌自卫的姿态。</li>
+            <li><b>演化路径</b>: 甲骨文 盾形轮廓 → 金文加装饰纹 → 小篆「盾」(盾+盾声) → 楷书「盾」固定为今体。</li>
+            <li><b>造字六书</b>: <b>会意</b>(手持防御物) + <b>形声</b>(盾为形+盾声)</li>
+            <li><b>核心意象公式</b>: 盾 = 坚固 + 阻挡 + 护身 = <b>被动防御力量的实体化</b></li>
+          </ul>
+
+          <p style="margin-top: 28px;"><b>【矛盾】作为成语</b></p>
+          <ul>
+            <li><b>典故来源</b>: 《韩非子·难一》载楚人卖矛与盾,自夸「吾盾之坚,物莫能陷」,又言「吾矛之利,于物无不陷」。旁人问:「以子之矛,陷子之盾,何如?」其人不能答。</li>
+            <li><b>哲学跃迁</b>: 从兵器对冲的物理困境,升华为<b>逻辑自洽性的终极拷问</b>——当两个绝对命题相互否定,系统陷入不可解的悖论困境。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 核心语义 -->
+      <div class="card">
+        <div class="card-label">核心语义 (Core Semantics)</div>
+        <div class="semantics-text">
+          <p><b>【本义】</b></p>
+          <ul>
+            <li><b>物理层</b>: 矛(进攻兵器)与盾(防御兵器)的功能对冲——一为破坏,一为保护,二者功能互斥却又成对存在。</li>
+            <li><b>军事层</b>: 战争中攻守双方的力量对峙,进攻必遇阻挡,防御必受冲击,形成动态平衡或失衡。</li>
+          </ul>
+
+          <p style="margin-top: 20px;"><b>【引申义】</b></p>
+          <ul>
+            <li><b>逻辑层</b>: 两个互不相容的命题/判断同时成立,导致<b>自洽性崩溃</b>。如「全能神能否创造自己举不起的石头?」</li>
+            <li><b>认知层</b>: 人的欲望/观念/行为之间的内在冲突。如追求自由与渴望安全的矛盾,个人利益与集体利益的矛盾。</li>
+            <li><b>辩证层</b>: 对立统一规律——矛盾不是终点,而是推动事物发展的内在动力。正是矛盾的斗争与调和,驱动系统演化至更高形态。</li>
+          </ul>
+
+          <p style="margin-top: 20px;"><b>【哲学高度】</b></p>
+          <ul>
+            <li><b>《智慧学九论》视角</b>: 矛盾是「The Many」的表象——看似无数不同的冲突,本质都是<b>体用失衡、能量流动受阻</b>的同一结构。</li>
+            <li><b>唯物辩证法</b>: 矛盾是事物内部及事物之间的对立统一关系,是事物发展的根本动力(对立斗争性+同一调和性)。</li>
+            <li><b>《道德经》呼应</b>: 「有无相生,难易相成,长短相形,高下相倾」——矛盾双方互为存在前提,无矛则无盾,无盾则矛无意义。</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <!-- 语义拓扑 -->
+      <div class="card">
+        <div class="card-label">语义拓扑 (Semantic Topology)</div>
+        <div class="mermaid">
+graph TD
+    A[字形本源:<br/>矛+盾=攻守对立] --> B[本义:<br/>兵器功能互斥]
+    B --> C1[引申义1:<br/>逻辑悖论]
+    B --> C2[引申义2:<br/>利益冲突]
+    B --> C3[引申义3:<br/>观念对抗]
+
+    C1 --> D1[现代用法:<br/>自相矛盾<br/>逻辑谬误]
+    C2 --> D2[现代用法:<br/>主要矛盾<br/>利益博弈]
+    C3 --> D3[现代用法:<br/>认知失调<br/>价值撕裂]
+
+    C1 --> E[哲学升华:<br/>对立统一规律<br/>发展的内在动力]
+    C2 --> E
+    C3 --> E
+
+    E --> F[终极洞察:<br/>矛盾即存在<br/>调和即演化]
+
+    style A fill:#FFE6A7,stroke:#C41E3A,stroke-width:3px
+    style E fill:#FFF9E6,stroke:#FFD700,stroke-width:2px
+    style F fill:#C41E3A,stroke:#FFD700,stroke-width:3px,color:#fff
+        </div>
+      </div>
+
+      <!-- 同源字辨析 -->
+      <div class="card">
+        <div class="card-label">同源字辨析 (Character Network)</div>
+        <div class="etymology-content">
+          <ul class="network-list">
+            <li><b>矛盾 vs 冲突</b>:<br/>
+              • 矛盾强调<b>逻辑层面的不可调和性</b>,是系统内在的结构性对立(如自相矛盾,生产力与生产关系的矛盾)<br/>
+              • 冲突强调<b>现象层面的碰撞与对抗</b>,是外显的力量交锋(如军事冲突,人际冲突),可通过外部手段化解
+            </li>
+            <li><b>矛盾 vs 悖论 (Paradox)</b>:<br/>
+              • 矛盾是<b>中文文化语境下的辩证思维产物</b>,强调「对立统一」的动态平衡,承认矛盾推动发展<br/>
+              • 悖论是<b>西方逻辑学概念</b>,强调自指/循环导致的逻辑崩溃(如「说谎者悖论」),追求通过重构系统消除悖论
+            </li>
+            <li><b>矛盾 vs 对立</b>:<br/>
+              • 矛盾是<b>系统内部的结构性依存关系</b>,双方互为存在前提(如阴阳,正负电荷)<br/>
+              • 对立仅表示<b>位置/性质的相反</b>,可独立存在(如南北对立,善恶对立)
+            </li>
+            <li><b>同部首字对比</b>:<br/>
+              • 矛/矜/矢: 均含「矛」旁,但「矜」强调<b>自持</b>(持矛示威→骄傲),「矢」强调<b>方向性</b>(箭矢→誓言)<br/>
+              • 盾/循/楯: 均含「盾」形,但「循」强调<b>遵从</b>(沿盾边行→顺序),「楯」为<b>古体盾字</b>(加木旁表材质)
+            </li>
+          </ul>
+          <div class="quote-box">
+            「世间万物,无不盾中有矛,矛中寓盾。圣人不避矛盾,而善化矛盾为机枢,使对立转为统一,冲突化作和谐,此乃《易》之大道。」<br/><br/>
+            — 典出《韩非子·难一》,哲学化于黑格尔「正反合」辩证法,在毛泽东《矛盾论》中达至顶峰。
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 底部金句 -->
+  <div class="epiphany-box">
+    <span class="epiphany-label">一语道破 (Epiphany)</span>
+    <div class="epiphany-text">
+      矛盾非病,乃生机——唯有对立之张力,方能撕裂旧秩序,孕育新形态。宇宙因矛盾而演化,智慧因矛盾而升维。<br/><br/>
+      Contradiction is not pathology, but vitality — only through the tension of opposites can old orders be torn apart and new forms gestated. The universe evolves through contradictions; wisdom ascends through contradictions.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#FFF9E6',
+      primaryTextColor: '#1a1a1a',
+      primaryBorderColor: '#C41E3A',
+      lineColor: '#FFD700',
+      fontFamily: 'Noto Sans SC, sans-serif',
+      fontSize: '14px'
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>汉字解剖: 明</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-color: #1a1a1a; /* 深色背景,呼应墨色 */
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --accent-red: #C41E3A; /* 中国红 */
+    --accent-gold: #FFD700; /* 金色,象征典籍 */
+    --border-color: #E5E7EB;
+    --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif; /* 宋体系 */
+    --font-sans: 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--bg-color) 0%, #2d1b1b 100%);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* 1. 头部 - 大字展示 */
+  .header {
+    background: var(--card-bg);
+    padding: 48px 40px;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .word-title {
+    font-family: 'STKaiti', 'KaiTi', var(--font-serif); /* 楷体,笔触感 */
+    font-size: 6em;
+    font-weight: 700;
+    margin: 0;
+    color: var(--accent-red);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    line-height: 1;
+  }
+  .pinyin {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5em;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* 2. Bento Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* 卡片样式 */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-red);
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  /* 内容区块 */
+  .genesis-content {
+    font-family: var(--font-serif);
+    font-size: 1.05em;
+    line-height: 1.9;
+  }
+  .genesis-content b {
+    color: var(--accent-red);
+  }
+
+  .semantics-text {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    color: var(--text-main);
+    line-height: 2;
+  }
+
+  .network-list {
+    margin: 0;
+    padding-left: 24px;
+    list-style: none;
+  }
+  .network-list li {
+    margin-bottom: 12px;
+    padding-left: 20px;
+    border-left: 3px solid var(--accent-gold);
+  }
+  .network-list li::marker {
+    content: "◆ ";
+    color: var(--accent-red);
+  }
+
+  .quote-box {
+    margin-top: 20px;
+    padding: 16px;
+    background: #FFF9E6;
+    border-left: 4px solid var(--accent-gold);
+    font-style: italic;
+    font-family: var(--font-serif);
+    color: #4A4A4A;
+    border-radius: 4px;
+  }
+
+  /* Mermaid 拓扑图 */
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: #FAFAFA;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+  }
+
+  /* 3. 底部 Epiphany - 全宽金句 */
+  .epiphany-box {
+    background: linear-gradient(135deg, #1a1a1a 0%, #3d1a1a 100%);
+    color: #fff;
+    padding: 48px;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .epiphany-label {
+    font-size: 0.75em;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    display: block;
+    color: var(--accent-gold);
+  }
+  .epiphany-text {
+    font-family: var(--font-serif);
+    font-size: 1.6em;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #FFE6A7;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  }
+  /* 装饰纹样 */
+  .epiphany-box::before {
+    content: "◆◆◆";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    color: var(--accent-gold);
+    opacity: 0.4;
+  }
+
+  /* 移动端适配 */
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .word-title { font-size: 4em; }
+    .header { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 头部: 大字 + 拼音 -->
+  <div class="header">
+    <h1 class="word-title">明</h1>
+    <span class="pinyin">míng</span>
+  </div>
+
+  <!-- Bento 布局 -->
+  <div class="bento-grid">
+
+    <div class="column">
+
+      <!-- 字形本源 -->
+      <div class="card">
+        <div class="card-label">字形本源 (Character Genesis)</div>
+        <div class="genesis-content">
+          <p><b>甲骨文画面</b>:「明」字最初由「日」(太阳)与「月」(月亮)二象并置窗牖之侧,描绘日月交替照耀窗户之景。造字者捕捉的是<b>昼夜光明连续不断</b>的宇宙节律——白天有日光,黑夜有月光,人居之所永无暗时。</p>
+
+          <p><b>演化路径</b>:<br>
+          甲骨文 <b>囧(窗格) + 日 + 月</b> →<br>
+          金文 <b>日 + 月合体,简化窗形</b> →<br>
+          小篆 <b>规整左右结构</b> →<br>
+          楷书 <b>今日之「明」,日月并列</b></p>
+
+          <p><b>造字六书</b>: <b>会意字</b>——以日、月二象会合,传达「光明无间」之意。</p>
+
+          <p><b>核心意象公式</b>:<br>
+          <span style="font-size:1.2em; color: #C41E3A; font-weight: bold;">明 = 日光 ⊕ 月光 = 全时域照亮</span><br>
+          <small>(⊕ 表示时空互补叠加)</small></p>
+        </div>
+      </div>
+
+      <!-- 核心语义 -->
+      <div class="card">
+        <div class="card-label">核心语义 (Core Semantics)</div>
+        <div class="semantics-text">
+          <p><b>本义</b>: 光亮、明亮。物理层面指光线充足,无昏暗遮蔽之状。</p>
+
+          <p><b>引申义</b>:<br>
+          <b>1. 视觉维度</b> → 照亮、显现(「明察秋毫」)<br>
+          <b>2. 认知维度</b> → 清晰、通晓(「明白道理」)<br>
+          <b>3. 道德维度</b> → 明德、显扬(「明德惟馨」)<br>
+          <b>4. 时间维度</b> → 次日、明年(「明日复明日」)</p>
+
+          <p><b>哲学高度</b>: 在中华文化中,「明」承载<b>「光明正大」「明心见性」</b>之理念。从物理光明到心智光明再到道德光明,构成儒家「明明德」(《大学》)与禅宗「见性成佛」的共同基底——<b>光明即觉醒,照亮即认知</b>。</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <!-- 语义拓扑 -->
+      <div class="card">
+        <div class="card-label">语义拓扑 (Semantic Topology)</div>
+        <div class="mermaid">
+graph TD
+    A[字形本源: 日+月] --> B[本义: 光亮无间]
+    B --> C1[视觉: 照亮显现]
+    B --> C2[认知: 清晰明白]
+    B --> C3[道德: 明德光大]
+    B --> C4[时间: 明日明年]
+    C1 --> D1[明镜 明察]
+    C2 --> D2[明白 明了]
+    C3 --> D3[明德 明君]
+    C4 --> D4[明天 明年]
+    D2 --> E[哲学: 明心见性]
+    D3 --> E
+    E --> F[终极: 光明即觉醒]
+
+style A fill:#FFF9E6,stroke:#C41E3A,stroke-width:3px
+style B fill:#FFE6A7,stroke:#FFD700,stroke-width:2px
+style E fill:#FFD700,stroke:#C41E3A,stroke-width:3px
+style F fill:#C41E3A,stroke:#1a1a1a,stroke-width:3px,color:#fff
+        </div>
+      </div>
+
+      <!-- 同源字辨析 -->
+      <div class="card">
+        <div class="card-label">同源字辨析 (Character Network)</div>
+        <div class="etymology-content">
+          <ul class="network-list">
+            <li><b>昭</b>(zhāo) - 同含日部,但强调「显著、昭示」之义。昭=日+召,侧重「召唤光明使显现」,多用于「昭告天下」「昭然若揭」,具主动宣示性。明则为客观光亮状态。</li>
+
+            <li><b>晨</b>(chén) - 同含日部,特指「清晨时分」。晨=日+辰(时辰),锚定日出之时刻点。明则涵盖全日夜光明,无时间约束。</li>
+
+            <li><b>朗</b>(lǎng) - 同含月部(良声),强调「清朗、明朗」之气氛感。朗侧重空气通透、声音清晰,多用「朗朗乾坤」「朗诵」。明则更侧重光源本体。</li>
+
+            <li><b>同音辨析: 鸣/名</b> - 虽同音(míng),但「鸣」为鸟叫声(口部),「名」为命名之词(夕+口),与光明语义域无涉。古人却借「明」之声韵暗喻「扬名立万」——<b>声名远播如光明遍照</b>。</li>
+          </ul>
+          <div class="quote-box">
+            「日月光华,旦复旦兮。」——《诗经·卫风·伯兮》<br>
+            <small>(日月之光华照耀,一日又一日永续循环)</small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 底部金句 -->
+  <div class="epiphany-box">
+    <span class="epiphany-label">一语道破 (Epiphany)</span>
+    <div class="epiphany-text">
+      明者,日月合璧,照彻昼夜之谓也。<br>
+      内则明心见性,外则明德惟馨,<br>
+      光明非他,觉醒之境界也。<br><br>
+      <span style="font-size:0.85em; opacity:0.9;">
+      Brightness is the union of sun and moon, illuminating both day and night.<br>
+      Inwardly it reveals the true nature of mind; outwardly it manifests virtue.<br>
+      Light is not elsewhere — it is the very state of awakening.
+      </span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#FFF9E6',
+      primaryTextColor: '#1a1a1a',
+      primaryBorderColor: '#C41E3A',
+      lineColor: '#FFD700',
+      fontFamily: 'Noto Sans SC, sans-serif',
+      fontSize: '14px'
+    }
+  });
+</script>
+</body>
+</html>

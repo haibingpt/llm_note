@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Word Mastery: Sincere</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-color: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --accent-color: #000000;
+    --border-color: #E5E7EB;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .header {
+    border-bottom: 3px solid var(--text-main);
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .word-title {
+    font-family: var(--font-serif);
+    font-size: 4.5em;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .phonetic {
+    font-family: 'Courier New', monospace;
+    font-size: 1.25em;
+    color: var(--text-muted);
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    height: fit-content;
+    transition: transform 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .definition-text {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    color: var(--text-main);
+  }
+  .highlight-red { color: #BE123C; font-weight: bold; }
+  .highlight-blue { color: #1D4ED8; font-weight: bold; }
+
+  .etymology-content {
+    font-size: 0.95em;
+  }
+
+  .nuance-list {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .nuance-item { margin-bottom: 8px; }
+
+  .quote-box {
+    margin-top: 16px;
+    padding-left: 12px;
+    border-left: 3px solid #BE123C;
+    font-style: italic;
+    color: var(--text-muted);
+    font-family: var(--font-serif);
+  }
+
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: #FAFAFA;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  .epiphany-box {
+    background-color: #111;
+    color: #fff;
+    padding: 32px;
+    text-align: center;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .epiphany-label {
+    font-size: 0.7em;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .epiphany-text {
+    font-family: 'Courier New', monospace;
+    font-size: 1.4em;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+  .epiphany-box::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 4px;
+    background: linear-gradient(90deg, #BE123C, #1D4ED8);
+  }
+
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .word-title { font-size: 3em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1 class="word-title">Sincere</h1>
+    <span class="phonetic">/sɪnˈsɪr/</span>
+  </div>
+
+  <div class="bento-grid">
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">CORE MEANING (核心语义)</div>
+        <div class="definition-text">
+          <b>原始画面</b>：古罗马的大理石市场上，不诚实的商人用蜡（cera）填补雕像的裂缝，冒充完美品出售。而那些真正无瑕的石材被标记为 <b>sine cera</b>——"没有蜡的"。<br><br>
+          <b>核心意象</b>：<span class="highlight-red">没有</span> + <span class="highlight-blue">蜡（伪装）</span> = 真诚<br><br>
+          这个词源故事虽有争议，却完美捕捉了 sincere 的灵魂：真诚不是一种<b>添加</b>，而是一种<b>去除</b>。它不是"我对你好"，而是"我没有对你藏东西"。<br><br>
+          一块 sincere 的大理石，不是比别的石头更美——它只是<b>没有用蜡填补自己的裂缝</b>。同理，一个 sincere 的人，不一定更善良、更聪明、更讨喜，他只是<b>拒绝用表演填补真实自我的缺口</b>。<br><br>
+          这就是为什么真诚总令人震动——在一个人人都在抹蜡的世界里，<b>裸露的石面本身就是勇气</b>。
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">NUANCE & CONTEXT (语感与语境)</div>
+        <div class="etymology-content">
+          <ul class="nuance-list">
+            <li class="nuance-item"><b>Sincere vs. Honest</b>：Honest 侧重<b>事实层面</b>——不撒谎、不欺骗，是行为规范。Sincere 侧重<b>情感层面</b>——内心所想与外在表达完全一致，是存在状态。一个人可以 honest 地说出事实，却不 sincere——因为他的关心是装出来的。</li>
+            <li class="nuance-item"><b>Sincere vs. Genuine</b>：Genuine 偏向"货真价实"（a genuine Rolex），强调真假鉴定；Sincere 偏向"表里如一"，强调内外一致。Genuine 是鉴定师的词，Sincere 是灵魂的词。</li>
+            <li class="nuance-item"><b>Sincere vs. Authentic</b>：Authentic 带有存在主义哲学色彩，指"忠于自我本质"，是一种自我关系；Sincere 更朝向他人，是一种<b>人际关系中的透明</b>。你对自己 authentic，对别人 sincere。</li>
+          </ul>
+          <div class="quote-box">
+            "The secret of success is sincerity. Once you can fake that, you've got it made." — Jean Giraudoux
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">SEMANTIC TOPOLOGY (语义拓扑)</div>
+        <div class="mermaid">
+graph TD
+    A["拉丁语 sincerus<br/>纯净的、未掺杂的"] --> B["sine cera 民间词源<br/>没有蜡"]
+    A --> C["本义：纯粹无杂质<br/>蜂蜜、血统"]
+    C --> D["内心无伪饰<br/>真诚的情感"]
+    C --> E["言语无矫饰<br/>sincere apology"]
+    D --> F["人际关系的<br/>最高货币"]
+    B --> G["去除伪装<br/>裸露裂缝的勇气"]
+    G --> F
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">ETYMOLOGY (词源)</div>
+        <div class="etymology-content">
+          <b>词根</b>：来自拉丁语 <b>sincerus</b>，意为"纯净的、完整的、未掺杂的"。可能由 <b>sin-</b>（一、单一）+ <b>*ker-</b>（生长）构成，原义为"单一生长的、未经混合的"。民间词源将其拆解为 <b>sine</b>（没有）+ <b>cera</b>（蜡），虽不被主流语言学采纳，却因画面感极强而深入人心。<br><br>
+          <b>同源词 (Cognates)</b>：
+          <ul class="nuance-list">
+            <li class="nuance-item"><b>Sinecure</b>（闲职）：sine + cura（没有 + 操心）。没有实际职责的职位。与 sincere 共享 sine-（没有）这个否定前缀的精神——通过"去除"来定义。</li>
+            <li class="nuance-item"><b>Cerement</b>（裹尸蜡布）：来自 cera（蜡）。古人用蜡布包裹尸体——蜡在这里是覆盖、封存、掩藏的工具，恰好是 sincere 要去除的东西。</li>
+            <li class="nuance-item"><b>Sinceritas</b>（拉丁语：纯净）：在早期基督教文献中，这个词被用来描述信仰的纯粹——没有掺杂私心的虔诚。从物质的"无杂质"到精神的"无伪装"，一脉相承。</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="epiphany-box">
+    <span class="epiphany-label">EPIPHANY (一语道破)</span>
+    <div class="epiphany-text">
+      "Sincerity is not about adding virtue, but removing wax.<br/>真诚不是添加美德，而是剥去伪装。"
+    </div>
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#ffffff',
+      primaryTextColor: '#1a1a1a',
+      primaryBorderColor: '#333',
+      lineColor: '#333',
+      fontFamily: 'Inter, sans-serif',
+      fontSize: '13px'
+    }
+  });
+</script>
+</body>
+</html>
