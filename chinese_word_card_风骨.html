@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>汉字解剖: 风骨</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-color: #1a1a1a;
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --accent-red: #C41E3A;
+    --accent-gold: #FFD700;
+    --border-color: #E5E7EB;
+    --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+    --font-sans: 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--bg-color) 0%, #2d1b1b 100%);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .header {
+    background: var(--card-bg);
+    padding: 48px 40px;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .word-title {
+    font-family: 'STKaiti', 'KaiTi', var(--font-serif);
+    font-size: 6em;
+    font-weight: 700;
+    margin: 0;
+    color: var(--accent-red);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    line-height: 1;
+  }
+  .pinyin {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5em;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-red);
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .genesis-content {
+    font-family: var(--font-serif);
+    font-size: 1.05em;
+    line-height: 1.9;
+  }
+  .genesis-content b {
+    color: var(--accent-red);
+  }
+
+  .semantics-text {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    color: var(--text-main);
+    line-height: 2;
+  }
+
+  .network-list {
+    margin: 0;
+    padding-left: 24px;
+    list-style: none;
+  }
+  .network-list li {
+    margin-bottom: 12px;
+    padding-left: 20px;
+    border-left: 3px solid var(--accent-gold);
+  }
+  .network-list li::marker {
+    content: "◆ ";
+    color: var(--accent-red);
+  }
+
+  .quote-box {
+    margin-top: 20px;
+    padding: 16px;
+    background: #FFF9E6;
+    border-left: 4px solid var(--accent-gold);
+    font-style: italic;
+    font-family: var(--font-serif);
+    color: #4A4A4A;
+    border-radius: 4px;
+  }
+
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: #FAFAFA;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+  }
+
+  .epiphany-box {
+    background: linear-gradient(135deg, #1a1a1a 0%, #3d1a1a 100%);
+    color: #fff;
+    padding: 48px;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .epiphany-label {
+    font-size: 0.75em;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    display: block;
+    color: var(--accent-gold);
+  }
+  .epiphany-text {
+    font-family: var(--font-serif);
+    font-size: 1.6em;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #FFE6A7;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  }
+  .epiphany-box::before {
+    content: "◆◆◆";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    color: var(--accent-gold);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .word-title { font-size: 4em; }
+    .header { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1 class="word-title">风骨</h1>
+    <span class="pinyin">fēng gǔ</span>
+  </div>
+
+  <div class="bento-grid">
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">字形本源 (Character Genesis)</div>
+        <div class="genesis-content">
+          <p><b>「风」</b>：甲骨文作「鳳」之假借，象凤鸟展翅之形。凤翔则气随，故引申为空气流动。小篆定型为「風」，从虫凡声——古人认为「风动虫生」，春风化雨，万物蠢动。风，是<b>天地呼吸的韵律</b>，无形而有势，不可见却可感。</p>
+          <p><b>「骨」</b>：甲骨文象骨架之形，肉已剔尽，唯留支撑之构。从冎（guǎ）有肉为「骨」，去肉为「冎」。《说文》：「骨，肉之核也。」骨者，<b>形体之干，立身之本</b>——无骨则肉瘫，人无骨则不立。</p>
+          <p><b>意象公式</b>：风骨 = 风（外在气象之流动）+ 骨（内在结构之挺立）= <b>刚柔相济的人格美学</b></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">核心语义 (Core Semantics)</div>
+        <div class="semantics-text">
+          <p><b>本义</b>：原指文学艺术作品中的刚健风格与遒劲笔力。《文心雕龙·风骨》：「是以怊怅述情，必始乎风；沉吟铺辞，莫先于骨。」</p>
+          <p><b>引申义</b>：</p>
+          <ul>
+            <li><b>人之风骨</b>：人的品格、气节、操守。不媚权贵，不随波逐流。</li>
+            <li><b>文之风骨</b>：文章的精神力量与结构骨架，忌绵软，忌浮夸。</li>
+            <li><b>画之风骨</b>：笔力遒劲，构图挺拔，有「气韵生动」之感。</li>
+          </ul>
+          <p><b>哲学高度</b>：「风骨」是中国文化中<b>「刚柔并济」审美理想的人格化</b>——既有「风」的灵动、自由、不滞于物；又有「骨」的坚定、刚直、不为外移。它是魏晋风度的核心，是士大夫精神的脊梁。</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">语义拓扑 (Semantic Topology)</div>
+        <div class="mermaid">
+graph TD
+    A[风:无形之动<br/>气韵·气势] --> B[文学·艺术风格]
+    C[骨:有形之立<br/>骨架·骨力] --> B
+    B --> D[人之品格<br/>气节·操守]
+    B --> E[文之风格<br/>刚健·遒劲]
+    B --> F[画之笔力<br/>气韵生动]
+    D --> G[魏晋风度<br/>建安风骨]
+    D --> H[士大夫精神<br/>威武不能屈]
+    E --> I[文心雕龙<br/>风骨篇]
+    F --> J[谢赫六法<br/>骨法用笔]
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">同源字辨析 (Character Network)</div>
+        <div class="etymology-content">
+          <ul class="network-list">
+            <li><b>风/气/韵</b>：皆含「流动」之意。「气」偏内在生命能量，「韵」偏余味悠长，「风」偏外在气象格局。</li>
+            <li><b>骨/架/干</b>：皆含「支撑」之意。「架」偏建筑结构，「干」偏主体主干，「骨」偏精神内核与品格根基。</li>
+            <li><b>风骨/风格</b>：「风格」偏重外在表现的独特性；「风骨」则强调内在精神的挺立与刚健，更具道德与美学双重维度。</li>
+            <li><b>风骨/气节</b>：「气节」偏重道德操守，「风骨」则兼及气质、才华、品格之综合，范围更广，更具审美意味。</li>
+          </ul>
+          <div class="quote-box">
+            「蓬莱文章建安骨，中间小谢又清发。」<br/>—— 李白《宣州谢朓楼饯别校书叔云》
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="epiphany-box">
+    <span class="epiphany-label">一语道破 (Epiphany)</span>
+    <div class="epiphany-text">
+      风骨是灵魂的脊梁，是精神的气韵 —<br/>
+      Character is the spine of the soul, spirit is its invisible grace.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#FFF9E6',
+      primaryTextColor: '#1a1a1a',
+      primaryBorderColor: '#C41E3A',
+      lineColor: '#FFD700',
+      fontFamily: 'Noto Sans SC, sans-serif',
+      fontSize: '14px'
+    }
+  });
+</script>
+</body>
+</html>
