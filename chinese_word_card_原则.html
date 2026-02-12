@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>汉字解剖: 原则</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-color: #1a1a1a;
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --accent-red: #C41E3A;
+    --accent-gold: #FFD700;
+    --border-color: #E5E7EB;
+    --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+    --font-sans: 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--bg-color) 0%, #2d1b1b 100%);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .header {
+    background: var(--card-bg);
+    padding: 48px 40px;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .word-title {
+    font-family: 'STKaiti', 'KaiTi', var(--font-serif);
+    font-size: 6em;
+    font-weight: 700;
+    margin: 0;
+    color: var(--accent-red);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    line-height: 1;
+  }
+  .pinyin {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5em;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-red);
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .genesis-content {
+    font-family: var(--font-serif);
+    font-size: 1.05em;
+    line-height: 1.9;
+  }
+  .genesis-content b {
+    color: var(--accent-red);
+  }
+
+  .semantics-text {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    color: var(--text-main);
+    line-height: 2;
+  }
+
+  .network-list {
+    margin: 0;
+    padding-left: 24px;
+    list-style: none;
+  }
+  .network-list li {
+    margin-bottom: 12px;
+    padding-left: 20px;
+    border-left: 3px solid var(--accent-gold);
+  }
+  .network-list li::marker {
+    content: "◆ ";
+    color: var(--accent-red);
+  }
+
+  .quote-box {
+    margin-top: 20px;
+    padding: 16px;
+    background: #FFF9E6;
+    border-left: 4px solid var(--accent-gold);
+    font-style: italic;
+    font-family: var(--font-serif);
+    color: #4A4A4A;
+    border-radius: 4px;
+  }
+
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: #FAFAFA;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+  }
+
+  .epiphany-box {
+    background: linear-gradient(135deg, #1a1a1a 0%, #3d1a1a 100%);
+    color: #fff;
+    padding: 48px;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .epiphany-label {
+    font-size: 0.75em;
+    opacity: 0.6;
+   text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    display: block;
+    color: var(--accent-gold);
+  }
+  .epiphany-text {
+    font-family: var(--font-serif);
+    font-size: 1.6em;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #FFE6A7;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  }
+  .epiphany-box::before {
+    content: "◆◆◆";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    color: var(--accent-gold);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .word-title { font-size: 4em; }
+    .header { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1 class="word-title">原则</h1>
+    <span class="pinyin">yuán zé</span>
+  </div>
+
+  <div class="bento-grid">
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">字形本源 (Character Genesis)</div>
+        <div class="genesis-content">
+          <p><b>原</b>（yuán）：甲骨文象「泉水从石穴中涌出」之形，上为石穴覆口，下为水流涌出。《说文》：「原，水泉本也。」造字法为<strong>指事</strong>——以石穴之口指示泉水源头所在。本义是「水源」，引申为「起始」「根本」。</p>
+          <br>
+          <p><b>则</b>（zé）：甲骨文为「鼎旁立刀」之形，鼎象征法度准则，刀象征裁决执行。《说文》：「则，等画物也。」造字法为<strong>会意</strong>——以鼎与刀的组合表达「以法度为准，以刑罚裁决」之意。本义是「法度」「标准」。</p>
+          <br>
+          <p><b>核心意象公式</b>：原则 = 根本之源（原）+ 裁决之尺（则）= 从源头确立的不可逾越的准则</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">核心语义 (Core Semantics)</div>
+        <div class="semantics-text">
+          <p><b>本义</b>：指事物最根本的、起决定作用的规律或准则。原为水之本，则为法之器，二字合而为一，意为<strong>从本源处确立的不可动摇的规范</strong>。</p>
+          <br>
+          <p><b>引申义</b>：从物理源头（泉水）→ 逻辑起点（根本）→ 价值根基（道德/行为准则）。在伦理学中，原则成为指导行为的根本规范；在法学中，原则是高于具体规则的价值基准；在科学中，原则是公理般的底层假设。</p>
+          <br>
+          <p><b>哲学高度</b>：「原则」承载了中华文明对「本」与「末」的辩证思考——<strong>求木之长者，必固其根本</strong>。原则不是束缚，而是让复杂系统有序运行的底层算法。它是中国人「守经达权」智慧的核心：守住原则（经），灵活应对变局（权）。</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <div class="card">
+        <div class="card-label">语义拓扑 (Semantic Topology)</div>
+        <div class="mermaid">
+graph TD
+    A[原:泉水源头<br/>Oracle: 石穴涌流] -->|指事造字| B[本义: 水源/根本]
+    C[则:鼎刀合形<br/>Oracle: 法度裁决] -->|会意造字| D[本义: 法度/准则]
+    B --> E[引申: 起始点]
+    D --> F[引申: 裁决标准]
+    E --> G[哲学义: 价值根基]
+    F --> H[哲学义: 行为规范]
+    G --> I[现代用法: 道德/行为/组织原则]
+    H --> I
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">同源字辨析 (Character Network)</div>
+        <div class="etymology-content">
+          <p><b>同部首字</b></p>
+          <ul class="network-list">
+          <li><b>原/源/泉</b>：四字皆与水之本有关。「源」后起字，专指水流起始；「泉」甲骨文象水从山洞流出；「原」兼指物理源头与抽象根本。</li>
+          <li><b>则/制/删</b>：「则」从鼎刀，强调裁决；「制」从衣从刀，象裁衣定规，引申为制度；「删」从刀从册，象用刀削除简册文字，强调取舍标准。</li>
+          <li><b>法/律/规</b>：「法」从水从去，象水平平正；「律」从彳从聿，原指音律，引申为统一标准；「规」从夫从见，象圆规，强调几何准则。</li>
+          </ul>
+          <br>
+          <p><b>对比辨析</b></p>
+          <ul class="network-list">
+          <li><b>原则 vs 规则</b>：原则是根本性的价值基准（如「诚实」）；规则是原则在具体情境中的操作化表述（如「考试不许作弊」）。</li>
+          <li><b>原则 vs 策略</b>：原则是战略层面的不可妥协（如「不作恶」）；策略是战术层面的灵活手段（如「商业竞争中的迂回」）。</li>
+          </ul>
+          <div class="quote-box">
+            「穷则变，变则通，通则久。是以自天佑之，吉无不利。」——《周易·系辞下》
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="epiphany-box">
+    <span class="epiphany-label">一语道破 (Epiphany)</span>
+    <div class="epiphany-text">
+      「原则」是灵魂的源代码 — Principles are the source code of the soul, non-negotiable algorithms that keep you intact when everything else fragments.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#FFF9E6',
+      primaryTextColor: '#1a1a1a',
+      primaryBorderColor: '#C41E3A',
+      lineColor: '#FFD700',
+      fontFamily: 'Noto Sans SC, sans-serif',
+      fontSize: '14px'
+    }
+  });
+</script>
+</body>
+</html>
