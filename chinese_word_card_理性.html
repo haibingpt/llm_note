@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>汉字解剖: 理性</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg-color: #1a1a1a; /* 深色背景，呼应墨色 */
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --accent-red: #C41E3A; /* 中国红 */
+    --accent-gold: #FFD700; /* 金色，象征典籍 */
+    --border-color: #E5E7EB;
+    --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif; /* 宋体系 */
+    --font-sans: 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--bg-color) 0%, #2d1b1b 100%);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* 1. 头部 - 大字展示 */
+  .header {
+    background: var(--card-bg);
+    padding: 48px 40px;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .word-title {
+    font-family: 'STKaiti', 'KaiTi', var(--font-serif); /* 楷体，笔触感 */
+    font-size: 6em;
+    font-weight: 700;
+    margin: 0;
+    color: var(--accent-red);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    line-height: 1;
+  }
+  .pinyin {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5em;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* 2. Bento Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* 卡片样式 */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-red);
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  /* 内容区块 */
+  .genesis-content {
+    font-family: var(--font-serif);
+    font-size: 1.05em;
+    line-height: 1.9;
+  }
+  .genesis-content b {
+    color: var(--accent-red);
+  }
+
+  .semantics-text {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    color: var(--text-main);
+    line-height: 2;
+  }
+
+  .network-list {
+    margin: 0;
+    padding-left: 24px;
+    list-style: none;
+  }
+  .network-list li {
+    margin-bottom: 12px;
+    padding-left: 20px;
+    border-left: 3px solid var(--accent-gold);
+  }
+  .network-list li::marker {
+    content: "◆ ";
+    color: var(--accent-red);
+  }
+
+  .quote-box {
+    margin-top: 20px;
+    padding: 16px;
+    background: #FFF9E6;
+    border-left: 4px solid var(--accent-gold);
+    font-style: italic;
+    font-family: var(--font-serif);
+    color: #4A4A4A;
+    border-radius: 4px;
+  }
+
+  /* Mermaid 拓扑图 */
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: #FAFAFA;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+  }
+
+  /* 3. 底部 Epiphany - 全宽金句 */
+  .epiphany-box {
+    background: linear-gradient(135deg, #1a1a1a 0%, #3d1a1a 100%);
+    color: #fff;
+    padding: 48px;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .epiphany-label {
+    font-size: 0.75em;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    display: block;
+    color: var(--accent-gold);
+  }
+  .epiphany-text {
+    font-family: var(--font-serif);
+    font-size: 1.6em;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #FFE6A7;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  }
+  /* 装饰纹样 */
+  .epiphany-box::before {
+    content: "◆◆◆";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    color: var(--accent-gold);
+    opacity: 0.4;
+  }
+
+  /* 移动端适配 */
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .word-title { font-size: 4em; }
+    .header { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 头部: 大字 + 拼音 -->
+  <div class="header">
+    <h1 class="word-title">理性</h1>
+    <span class="pinyin">lǐ xìng</span>
+  </div>
+
+  <!-- Bento 布局 -->
+  <div class="bento-grid">
+
+    <div class="column">
+
+      <!-- 字形本源 -->
+      <div class="card">
+        <div class="card-label">字形本源 (Character Genesis)</div>
+        <div class="genesis-content">
+          <b>理 (lǐ)</b><br>
+          • <b>造字:</b> 形声字，形符"王"（玉），声符"里"<br>
+          • <b>演化:</b> 金文 → 小篆（玉在左，里在右）→ 楷书"理"<br>
+          • <b>核心意象:</b> 玉的纹理 + 内在规律 = 宇宙万物的条理<br>
+          • <b>本义:</b> 加工玉石，顺着纹理雕琢<br><br>
+
+          <b>性 (xìng)</b><br>
+          • <b>造字:</b> 会意字，"生"（生命）+ "心"（心智/情感）<br>
+          • <b>演化:</b> 金文 → 小篆 → 楷书"性"<br>
+          • <b>核心意象:</b> 生命固有的本质属性<br>
+          • <b>本义:</b> 天生而来的本性、质地<br><br>
+
+          <b>理性整体公式:</b> 理性 = 内在本性 + 外在逻辑 = 顺应规律的本质认知
+        </div>
+      </div>
+
+      <!-- 核心语义 -->
+      <div class="card">
+        <div class="card-label">核心语义 (Core Semantics)</div>
+        <div class="semantics-text">
+          <b>本义层:</b> 顺应事物条理的天性<br><br>
+
+          <b>引申层:</b><br>
+          1. <b>思维方法:</b> 以逻辑推理和系统分析把握客观规律<br>
+          2. <b>认知能力:</b> 超越感性和直觉，通过推理把握本质<br>
+          3. <b>行为特征:</b> 冷静、客观、可验证的认知方式<br><br>
+
+          <b>哲学高度:</b><br>
+          • <b>中国哲学:</b> 程朱理学的"性即理"——人性与宇宙规律的合一<br>
+          • <b>西方哲学:</b> 从柏拉图到康德，理性是灵魂的罗盘，是人区别于动物的特有能力<br><br>
+
+          <b>认知维度:</b><br>
+          理性是对认知过程的一种要求——不是摒弃情感，而是让认知符合逻辑规范、经得起检验
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <!-- 语义拓扑 -->
+      <div class="card">
+        <div class="card-label">语义拓扑 (Semantic Topology)</div>
+        <div class="mermaid">
+graph TD
+    A[理性] --> B{维度}
+    B --> C[认知层]
+    B --> D[哲学层]
+    B --> E[行为层]
+    C --> C1[逻辑推理]
+    C --> C2[系统分析]
+    C --> C3[客观验证]
+    D --> D1[宇宙规律]
+    D --> D2[人性本质]
+    D --> D3[智慧之光]
+    E --> E1[冷静判断]
+    E --> E2[证据说话]
+    E --> E3[可预期性]
+    C1 --> F[把握本质]
+    F --> G[穿透现象]
+    G --> H[建立认知秩序]
+    D1 --> D2
+    D2 --> D3
+        </div>
+      </div>
+
+      <!-- 同源字辨析 -->
+      <div class="card">
+        <div class="card-label">同源字辨析 (Character Network)</div>
+        <div class="etymology-content">
+          <ul class="network-list">
+            <li><b>理 vs 道理</b><br>
+              • 理：内在的纹理和规律，更抽象<br>
+              • 道理：外在的道理和路径，更具伦理性<br>
+              差异：理偏重客观规律，道理偏重人文规范</li>
+
+            <li><b>理 vs 法</b><br>
+              • 理：自然的内在条理<br>
+              • 法：人为制定的规则<br>
+              差异：理是道，法是术；理是自然，法是人为</li>
+
+            <li><b>性 vs 情</b><br>
+              • 性：固有的、稳定的本性<br>
+              • 情：流动的、变化的情感<br>
+              差异：性是本体，情是用；性是根，情是枝</li>
+
+            <li><b>理性 vs 感性</b><br>
+              • 理性：逻辑、推理、可验证<br>
+              • 感性：直觉、情感、直接体验<br>
+              关系：理性与感性互补，二者构成完整认知</li>
+
+            <li><b>理性 vs 智性</b><br>
+              • 理性：侧重逻辑推理和规范<br>
+              • 智性：侧重洞察力和整体把握<br>
+              差异：理性是过程，智性是境界</li>
+          </ul>
+
+          <div class="quote-box">
+            「理者，成物之文也；性者，人之所以为人也。」
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 底部金句 -->
+  <div class="epiphany-box">
+    <span class="epiphany-label">一语道破 (Epiphany)</span>
+    <div class="epiphany-text">
+      理性是生命内在的秩序之光，在混沌中保持清醒，以逻辑之刃穿透现象迷雾，直抵万物本质。
+    </div>
+  </div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#FFF9E6',
+      primaryTextColor: '#1a1a1a',
+      primaryBorderColor: '#C41E3A',
+      lineColor: '#FFD700',
+      fontFamily: 'Noto Sans SC, sans-serif',
+      fontSize: '14px'
+    }
+  });
+</script>
+</body>
+</html>
